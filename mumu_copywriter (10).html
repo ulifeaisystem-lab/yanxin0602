@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林老師・杏姊專屬・竹南沐沐蒸足社群文案大師</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans TC', 'PingFang TC', sans-serif; background: #fdf6f0; color: #2d3748; padding: 20px 16px 60px; }
+        .page { max-width: 1200px; margin: 0 auto; }
+
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h1 { font-size: 24px; font-weight: 900; color: #2d3748; line-height: 1.4; }
+        .header h1 span { color: #e07b4f; }
+        .header p { font-size: 11px; color: #a0aec0; margin-top: 6px; letter-spacing: 1.5px; }
+
+        .main-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+        @media (max-width: 860px) { .main-layout { grid-template-columns: 1fr; } }
+
+        .left-card { background: #fff; border-radius: 36px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(224,123,79,0.08); border: 1px solid rgba(224,123,79,0.1); }
+
+        .api-wrap { background: #fff8f3; border: 1.5px solid #fddcc8; border-radius: 16px; padding: 14px 16px; margin-bottom: 24px; }
+        .api-label { font-size: 12px; font-weight: 900; color: #e07b4f; margin-bottom: 8px; }
+        .api-row { display: flex; gap: 8px; }
+        .api-input { flex: 1; padding: 10px 14px; border: 1.5px solid #e2e8f0; border-radius: 12px; font-size: 13px; background: #fff; color: #2d3748; letter-spacing: 2px; font-family: inherit; transition: all 0.2s; }
+        .api-input:focus { outline: none; border-color: #e07b4f; box-shadow: 0 0 0 3px rgba(224,123,79,0.1); }
+        .eye-btn { background: #f7f7f7; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 8px 12px; cursor: pointer; font-size: 15px; color: #a0aec0; transition: all 0.2s; }
+        .eye-btn:hover { border-color: #e07b4f; color: #e07b4f; }
+        .api-hint { font-size: 11px; color: #a0aec0; margin-top: 7px; line-height: 1.6; }
+        .api-hint a { color: #e07b4f; font-weight: 700; text-decoration: none; }
+
+        /* 模型選擇 */
+        .model-row { display: flex; gap: 6px; margin-top: 10px; }
+        .model-btn { flex: 1; padding: 7px 4px; border-radius: 10px; font-size: 11px; font-weight: 700; font-family: inherit; cursor: pointer; border: 1.5px solid #e2e8f0; background: #f7f7f7; color: #718096; transition: all 0.2s; text-align: center; }
+        .model-btn.active { background: #fff3ec; border-color: #e07b4f; color: #e07b4f; }
+        .model-btn:hover:not(.active) { border-color: #e07b4f; color: #e07b4f; }
+
+        .menu-header { font-size: 19px; font-weight: 900; color: #2d3748; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .style-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+        .style-btn { width: 100%; padding: 20px 18px; border-radius: 22px; font-size: 16px; font-weight: 900; font-family: inherit; cursor: pointer; transition: all 0.25s; text-align: center; border: none; line-height: 1.4; }
+        .style-btn.inactive { background: #f5f5f7; color: #2d3748; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .style-btn.inactive:hover { background: #fff; box-shadow: 0 4px 16px rgba(224,123,79,0.15); color: #e07b4f; }
+        .style-btn.active { background: #e07b4f; color: #fff; box-shadow: 0 6px 24px rgba(224,123,79,0.4); transform: translateY(-1px); }
+        .style-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .tool-label { font-size: 11px; font-weight: 900; color: #a0aec0; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+        .tools-row { display: flex; gap: 8px; margin-bottom: 6px; }
+        .tool-link { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 11px 6px; border-radius: 14px; font-size: 13px; font-weight: 800; text-decoration: none; color: #fff; transition: all 0.2s; }
+        .tool-link:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .t-gemini  { background: linear-gradient(135deg,#4285F4,#1a6cf5); box-shadow: 0 3px 12px rgba(66,133,244,0.3); }
+        .t-chatgpt { background: linear-gradient(135deg,#10a37f,#0d8c6b); box-shadow: 0 3px 12px rgba(16,163,127,0.3); }
+        .t-fb      { background: linear-gradient(135deg,#1877f2,#0a5dc2); box-shadow: 0 3px 12px rgba(24,119,242,0.3); }
+        .t-ig      { background: linear-gradient(135deg,#f58529,#dd2a7b,#8134af); box-shadow: 0 3px 12px rgba(221,42,123,0.3); }
+        .t-threads { background: linear-gradient(135deg,#555,#111); box-shadow: 0 3px 12px rgba(0,0,0,0.25); }
+        .tools-hint { font-size: 11px; color: #c0c8d8; text-align: center; margin-top: 5px; }
+
+        .right-area { display: flex; flex-direction: column; gap: 14px; }
+        .status-bar { background: #fff8f3; border: 1.5px solid #fddcc8; border-radius: 16px; padding: 14px 18px; color: #e07b4f; font-weight: 900; font-size: 14px; text-align: center; display: none; }
+        .status-bar.error { background: #fff5f5; border-color: #fed7d7; color: #e53e3e; }
+
+        /* 進度條動畫 */
+        .progress-bar { height: 3px; background: #fddcc8; border-radius: 99px; overflow: hidden; margin-top: 8px; display: none; }
+        .progress-fill { height: 100%; background: #e07b4f; border-radius: 99px; width: 0%; transition: width 0.4s ease; }
+
+        .cols-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        @media (max-width: 860px) { .cols-grid { grid-template-columns: 1fr; } .tools-row { flex-wrap: wrap; } .tool-link { flex: 1 1 40%; } }
+        .col { background: #fff; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; box-shadow: 0 4px 16px rgba(0,0,0,0.04); min-height: 360px; border: 1px solid #f5ede4; }
+        .col-fb { border-top: 5px solid #1877f2; }
+        .col-ig { border-top: 5px solid #e1306c; }
+        .col-threads { border-top: 5px solid #3d3d3d; }
+        .col-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #f0f4f8; }
+        .col-name { font-weight: 900; font-size: 13px; font-style: italic; }
+        .n-fb { color: #1877f2; }
+        .n-ig { color: #e1306c; }
+        .n-threads { color: #3d3d3d; }
+        .copy-btn { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 900; color: #a0aec0; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .copy-btn:hover { background: #e07b4f; color: #fff; border-color: #e07b4f; }
+        .output-box { flex: 1; background: #fdfaf7; border: 1.5px solid #edf2f7; border-radius: 14px; padding: 14px; font-size: 13.5px; line-height: 1.8; white-space: pre-wrap; color: #4a5568; overflow-y: auto; min-height: 280px; transition: all 0.3s; }
+        .output-box.loading { color: #c0c8d8; font-style: italic; }
+        .output-box.done { border-color: #fddcc8; }
+
+        /* 打字機效果 */
+        @keyframes cursor-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        .cursor { display: inline-block; width: 2px; height: 1em; background: #e07b4f; vertical-align: middle; margin-left: 2px; animation: cursor-blink 0.8s infinite; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <h1>❤️ <span>林老師・杏姊</span> 專屬<br>竹南沐沐蒸足・社群文案大師</h1>
+        <p>溫慢系姐姐・親切店長・U-Life 系統實踐者｜Gemini 2.5 即時生成</p>
+    </div>
+
+    <div class="main-layout">
+        <div class="left-card">
+            <div class="api-wrap">
+                <div class="api-label">🔑 Gemini API Key</div>
+                <div class="api-row">
+                    <input type="password" id="userApiKey" class="api-input" placeholder="貼上你的 API Key...">
+                    <button class="eye-btn" onclick="toggleKey()">👁</button>
+                </div>
+                <div class="model-row">
+                    <button class="model-btn active" id="m-flash" onclick="setModel('gemini-2.5-flash')">2.5 Flash ⚡</button>
+                    <button class="model-btn" id="m-pro" onclick="setModel('gemini-2.5-pro')">2.5 Pro 🧠</button>
+                </div>
+                <div class="api-hint">沒有金鑰？<a href="https://aistudio.google.com/app/apikey" target="_blank">點此免費申請</a>（每天 1,500 次免費）</div>
+            </div>
+
+            <div class="menu-header">🚀 風格選單</div>
+            <div class="style-list">
+                <button class="style-btn inactive" id="btn-health" onclick="generate('health')">舒壓調理・好眠好氣色</button>
+                <button class="style-btn inactive" id="btn-story"  onclick="generate('story')">店長日常・生活故事分享</button>
+                <button class="style-btn inactive" id="btn-biz"    onclick="generate('biz')">0元加盟・創業新商機</button>
+                <button class="style-btn inactive" id="btn-team"   onclick="generate('team')">團隊共好・異業合作</button>
+            </div>
+
+            <div class="tool-label">🤖 AI 潤飾工具</div>
+            <div class="tools-row" style="margin-bottom:16px;">
+                <a href="https://gemini.google.com/" target="_blank" class="tool-link t-gemini">✦ Gemini</a>
+                <a href="https://chatgpt.com/" target="_blank" class="tool-link t-chatgpt">⚡ ChatGPT</a>
+            </div>
+
+            <div class="tool-label">📲 直接發文</div>
+            <div class="tools-row">
+                <a href="https://www.facebook.com/" target="_blank" class="tool-link t-fb">f FB</a>
+                <a href="https://www.instagram.com/" target="_blank" class="tool-link t-ig">📷 IG</a>
+                <a href="https://www.threads.net/" target="_blank" class="tool-link t-threads">@ TH</a>
+            </div>
+            <div class="tools-hint">複製文案 → 點平台 → 貼上發文</div>
+        </div>
+
+        <div class="right-area">
+            <div id="statusBar" class="status-bar">
+                <span id="statusText"></span>
+                <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+            <div class="cols-grid">
+                <div class="col col-fb">
+                    <div class="col-head"><span class="col-name n-fb">FB 故事長文版</span><button class="copy-btn" onclick="copyCol('out-fb',this)">複製</button></div>
+                    <div id="out-fb" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+                <div class="col col-ig">
+                    <div class="col-head"><span class="col-name n-ig">IG 質感短文版</span><button class="copy-btn" onclick="copyCol('out-ig',this)">複製</button></div>
+                    <div id="out-ig" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+                <div class="col col-threads">
+                    <div class="col-head"><span class="col-name n-threads">Threads 口語金句版</span><button class="copy-btn" onclick="copyCol('out-threads',this)">複製</button></div>
+                    <div id="out-threads" class="output-box">點擊左側按鈕開始生成...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedModel = 'gemini-2.5-flash';
+
+const PROMPTS = {
+    health: '舒壓調理・好眠好氣色（主打遠紅外線蒸足改善睡眠、促進微循環、排濕調理的功效與體驗感受）',
+    story:  '店長日常・生活故事分享（分享杏姊從國中老師退休後開設竹南沐沐蒸足店的生活日常、溫暖故事與心情）',
+    biz:    '0元加盟・創業新商機（介紹 U-LIFE 系統的低風險創業模式、0元加盟金、完整培訓、適合退休或轉型的朋友）',
+    team:   '團隊共好・異業合作（分享 U-LIFE 團隊共好文化、異業合作共享客源、不單打獨鬥的溫暖創業氛圍）'
+};
+
+function toggleKey() {
+    const el = document.getElementById('userApiKey');
+    el.type = el.type === 'password' ? 'text' : 'password';
+}
+
+function setModel(model) {
+    selectedModel = model;
+    document.getElementById('m-flash').classList.toggle('active', model === 'gemini-2.5-flash');
+    document.getElementById('m-pro').classList.toggle('active', model === 'gemini-2.5-pro');
+}
+
+function setStatus(msg, isError) {
+    const bar = document.getElementById('statusBar');
+    const text = document.getElementById('statusText');
+    const pb = document.getElementById('progressBar');
+    bar.style.display = 'block';
+    bar.className = 'status-bar' + (isError ? ' error' : '');
+    text.textContent = msg;
+    pb.style.display = isError ? 'none' : 'block';
+}
+
+function setProgress(pct) {
+    document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function hideStatus() {
+    document.getElementById('statusBar').style.display = 'none';
+}
+
+function setLoading(id, msg) {
+    const el = document.getElementById(id);
+    el.className = 'output-box loading';
+    el.textContent = msg;
+}
+
+function setDone(id, text) {
+    const el = document.getElementById(id);
+    el.className = 'output-box done';
+    el.textContent = text;
+}
+
+function typewriter(id, text, totalMs) {
+    return new Promise(resolve => {
+        const el = document.getElementById(id);
+        el.className = 'output-box done';
+        el.textContent = '';
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        el.appendChild(cursor);
+        let i = 0;
+        const speed = Math.min(10, Math.max(2, Math.floor(totalMs / (text.length || 1))));
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                // 用 textContent + substring 讓 \n 正確渲染為換行
+                el.textContent = text.substring(0, i + 1);
+                el.appendChild(cursor);
+                i++;
+            } else {
+                clearInterval(timer);
+                cursor.remove();
+                resolve();
+            }
+        }, speed);
+    });
+}
+
+async function callGemini(apiKey, prompt) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`;
+    const body = {
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.95, maxOutputTokens: 8192, responseMimeType: 'application/json' }
+    };
+    const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        const msg = err?.error?.message || `HTTP ${res.status}`;
+        throw new Error(msg);
+    }
+    const data = await res.json();
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+}
+
+function buildPrompt(type) {
+    const topic = PROMPTS[type];
+    return `你是「杏姊（林老師）」的專屬社群文案撰寫助理。
+
+【角色背景】
+- 杏姊本名林老師，曾任國中班導師數十年，退休後在苗栗竹南創立「竹南沐沐蒸足」
+- 個性溫暖、親切、不誇大，說話像鄰居大姐，有教育者沉穩的故事感
+- 主要服務：遠紅外線蒸足調理，幫助舒壓、改善睡眠、促進微循環
+- 事業平台：U-LIFE 健康事業系統（0元加盟金、完整培訓）
+- 目標受眾：40-60歲女性、職業媽媽、退休族、想轉型創業者
+
+【此次主題】
+${topic}
+
+【寫作風格要求】
+- 溫慢系、真誠、不誇大效果，禁用「超神奇」「立刻暴富」等誇張詞彙
+- 用第一人稱「我是杏姊／我是林老師」開場，帶入個人真實故事或觀察
+- 結尾引導互動：「私訊杏姊」或「歡迎預約」
+
+請直接將文案填入以下 JSON 格式中：
+{
+  "fb": "FB故事長文（400-600字，適當換行分段，有開頭故事、中段知識、結尾互動）",
+  "ig": "IG質感短文（120-180字，適當換行，有 emoji 點綴，4-6個 hashtag）",
+  "threads": "Threads口語金句（80-120字，口語化、有個人觀察，1-2個 hashtag）"
+}
+
+只回傳 JSON，不要加任何說明文字或 markdown 標記。`;
+}
+
+async function generate(type) {
+    const apiKey = document.getElementById('userApiKey').value.trim();
+    if (!apiKey) {
+        setStatus('⚠️ 請先填入 Gemini API Key！', true);
+        document.getElementById('userApiKey').focus();
+        return;
+    }
+
+    // 鎖定按鈕
+    document.querySelectorAll('.style-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.add('inactive');
+        b.disabled = true;
+    });
+    document.getElementById('btn-' + type).classList.add('active');
+    document.getElementById('btn-' + type).classList.remove('inactive');
+
+    setStatus('❤️ 林老師的故事正在醞釀中，請稍候...', false);
+    setProgress(10);
+    setLoading('out-fb', '正在謄寫溫慢故事長文...');
+    setLoading('out-ig', '質感短文排版中...');
+    setLoading('out-threads', '口語金句精煉中...');
+
+    try {
+        setProgress(30);
+        const raw = await callGemini(apiKey, buildPrompt(type));
+        setProgress(75);
+
+        let json;
+        try {
+            json = JSON.parse(raw.trim());
+        } catch (e) {
+            try {
+                let cleanRaw = raw.trim();
+                if (cleanRaw.startsWith('`')) {
+                    cleanRaw = cleanRaw.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
+                }
+                json = JSON.parse(cleanRaw);
+            } catch (err) {
+                const extract = (text, key) => {
+                    const match = text.match(new RegExp('"' + key + '"\\s*:\\s*"([\\s\\S]*?)"(?=\\s*,|\\s*})'));
+                    return match ? match[1] : '';
+                };
+                json = { fb: extract(raw, 'fb'), ig: extract(raw, 'ig'), threads: extract(raw, 'threads') };
+            }
+        }
+
+        Object.keys(json).forEach(key => {
+            if (json[key]) {
+                json[key] = json[key].replace(/\\n/g, '\n').replace(/\\"/g, '"').trim();
+            }
+        });
+
+        if (!json.fb && !json.ig) throw new Error('格式完全毀損');
+
+        setProgress(90);
+        hideStatus();
+        await typewriter('out-fb', json.fb || '（未生成成功）', 1500);
+        await typewriter('out-ig', json.ig || '（未生成成功）', 800);
+        await typewriter('out-threads', json.threads || '（未生成成功）', 500);
+        setProgress(100);
+
+    } catch (err) {
+        let friendly = err.message;
+        if (friendly.includes('API_KEY_INVALID') || friendly.includes('API key not valid')) {
+            friendly = 'API Key 無效，請重新確認金鑰是否正確';
+        } else if (friendly.includes('QUOTA_EXCEEDED') || friendly.includes('429')) {
+            friendly = '今日免費額度已用完，明天再試或升級 API 方案';
+        } else if (friendly.includes('SAFETY')) {
+            friendly = '內容被安全系統攔截，請稍後重試';
+        } else if (friendly.includes('Failed to fetch') || friendly.includes('NetworkError')) {
+            friendly = '網路連線失敗，請確認網路後重試';
+        }
+        setDone('out-fb', '❌ 生成失敗');
+        setDone('out-ig', '');
+        setDone('out-threads', '');
+        setStatus('❌ ' + friendly, true);
+    } finally {
+        document.querySelectorAll('.style-btn').forEach(b => { b.disabled = false; });
+    }
+}
+
+function copyCol(id, btn) {
+    const text = document.getElementById(id).innerText;
+    if (!text || text.startsWith('點擊') || text.startsWith('正在') || text.startsWith('❌') || text.startsWith('⚠️')) return;
+    navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerText;
+        btn.innerText = '✓ 已複製';
+        setTimeout(() => btn.innerText = orig, 2000);
+    });
+}
+</script>
+</body>
+</html>
